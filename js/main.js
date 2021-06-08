@@ -15,12 +15,9 @@ Voto
 const app = new Vue({
     el: '#app',
     data:{
-        apiUrl:"https://api.themoviedb.org/3/movie",
-        parametri:{
-            apiCodice:'8f58a1f8f7e267aeaf6ae8744c0f20d4',
-            linguaggio : 'it-IT',
-        },
-        domanda: '',
+        apiUrl: "https://api.themoviedb.org/3/search/movie",
+        api_key: "8f58a1f8f7e267aeaf6ae8744c0f20d4",
+        query:"",
         listaFilm:[],
         trovaFilm:'',
     },
@@ -29,31 +26,43 @@ const app = new Vue({
         cercaFilm: function(){
             let singoloFilm = this.trovaFilm.toLowerCase();
             this.films.forEach(film => {
-                let singoloNome = film.name.toLowerCase();
+                let singoloNome = film.original_title.toLowerCase();
                 if (singoloNome.includes(singoloFilm)) {
-                    film.adult = true;
+                    film.video = true;
                 }else{
-                    film.adult = false;
+                    film.video = false;
                 }
             });
         }
     },
 
     mounted(){
+           const interaApi = `${this.apiUrl}?api_key=${this.api_key}&query=${this.query}`;
+           console.log(interaApi);
 
-            axios
-            .get(this.apiUrl)
-            .then(risp => {
-                console.log(risp.data.production_companies);
-                this.listaFilm = risp.data.production_companies;
+           axios
+           .get(this.apiUrl)
+           .then(risp => {
+                console.log(risp.data.results);
+                this.listaFilm = risp.data.results;
                 console.log(this.listaFilm);
             })
-            .catch(e => {
-                console.error(e);
+            // axios
+            // .get(apiUrl, {
+            //     params:{
+            //         api_key:'8f58a1f8f7e267aeaf6ae8744c0f20d4',
+            //         query: '',
+            //         language : 'it-IT',
+            //     },
+            // })
+         
+            // .catch(e => {
+            //     console.error(e);
     
-            })
+            // })
         
     },
 })
 
 
+{/* <input v-model="query" v-on:keyup.enter="getSearch()" placeholder="Inserisci un titolo"> */}

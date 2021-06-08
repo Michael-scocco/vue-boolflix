@@ -9,7 +9,8 @@
 </head>
 <body>
     <div id="app">
-        <input v-model="trovaFilm" type="text" @keyup.enter="cercaFilm" placeholder="Cerca un film">
+        <input v-model="query" type="text"  placeholder="Cerca un film">
+        <button @keyup="cercaFilm()">click me</button>
 
     </div>
     <!-- VUE JS -->

@@ -15,22 +15,23 @@ Voto
 const app = new Vue({
     el: '#app',
     data:{
-        url:"https://api.themoviedb.org/3/movie/550",
-        apiKey:'8f58a1f8f7e267aeaf6ae8744c0f20d4',
-        domanda: 'ritorno+al+futuro',
-
+        apiUrl:"https://api.themoviedb.org/3/movie",
+        parametri:{
+            apiCodice:'8f58a1f8f7e267aeaf6ae8744c0f20d4',
+            linguaggio : 'it-IT',
+        },
+        domanda: '',
         listaFilm:[],
     },
     methods:{
 
     },
     mounted(){
-            const tuttaUrl = `${this.url}?api_key=${this.apiKey}query=${domanda}`
             axios
-            .get(this.url)
-            .then(resp => {
-                console.log(resp.data);
-                this.listaFilm = resp.data;
+            .get(this.apiUrl)
+            .then(risp => {
+                console.log(risp.data.production_companies);
+                this.listaFilm = rsp.data.production_companies;
                 console.log(this.listaFilm);
             })
             .catch(e => {
@@ -40,3 +41,14 @@ const app = new Vue({
         
     },
 })
+
+// cercaFilm: function(){
+//     let singoloFilm = this.trovaFilm.toLowerCase();
+//      this.films.forEach(film => {
+//          let singoloNome = film.name.toLowerCase();
+//          if (singoloNome.includes(singoloFilm)) {
+//              film.visible = true;
+//          }else{
+//              film.visible = false;
+//          }
+//      });

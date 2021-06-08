@@ -10,18 +10,24 @@ Lingua
 Voto
 */
 
+// "https://api.themoviedb.org/3/movie/550?api_key=8f58a1f8f7e267aeaf6ae8744c0f20d4&query=ritorno+al+futuro"
+
 const app = new Vue({
     el: '#app',
     data:{
+        url:"https://api.themoviedb.org/3/movie/550",
+        apiKey:'8f58a1f8f7e267aeaf6ae8744c0f20d4',
+        domanda: 'ritorno+al+futuro',
+
         listaFilm:[],
     },
     methods:{
 
     },
     mounted(){
-       
+            const tuttaUrl = `${this.url}?api_key=${this.apiKey}query=${domanda}`
             axios
-            .get("https://api.themoviedb.org/3/movie/550?api_key=8f58a1f8f7e267aeaf6ae8744c0f20d4&query=harry+potter")
+            .get(this.url)
             .then(resp => {
                 console.log(resp.data);
                 this.listaFilm = resp.data;

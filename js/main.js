@@ -22,17 +22,21 @@ const app = new Vue({
         },
         domanda: '',
         listaFilm:[],
+        trovaFilm:'',
     },
+
     methods:{
         cercaFilm: function(){
-    let singoloFilm = this.trovaFilm.toLowerCase();
-     this.films.forEach(film => {
-         let singoloNome = film.name.toLowerCase();
-         if (singoloNome.includes(singoloFilm)) {
-             film.adult = true;
-         }else{
-             film.adult = false;
-         }
+            let singoloFilm = this.trovaFilm.toLowerCase();
+            this.films.forEach(film => {
+                let singoloNome = film.name.toLowerCase();
+                if (singoloNome.includes(singoloFilm)) {
+                    film.adult = true;
+                }else{
+                    film.adult = false;
+                }
+            });
+        }
     },
 
     mounted(){

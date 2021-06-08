@@ -24,14 +24,24 @@ const app = new Vue({
         listaFilm:[],
     },
     methods:{
-
+        cercaFilm: function(){
+    let singoloFilm = this.trovaFilm.toLowerCase();
+     this.films.forEach(film => {
+         let singoloNome = film.name.toLowerCase();
+         if (singoloNome.includes(singoloFilm)) {
+             film.adult = true;
+         }else{
+             film.adult = false;
+         }
     },
+
     mounted(){
+
             axios
             .get(this.apiUrl)
             .then(risp => {
                 console.log(risp.data.production_companies);
-                this.listaFilm = rsp.data.production_companies;
+                this.listaFilm = risp.data.production_companies;
                 console.log(this.listaFilm);
             })
             .catch(e => {
@@ -42,13 +52,4 @@ const app = new Vue({
     },
 })
 
-// cercaFilm: function(){
-//     let singoloFilm = this.trovaFilm.toLowerCase();
-//      this.films.forEach(film => {
-//          let singoloNome = film.name.toLowerCase();
-//          if (singoloNome.includes(singoloFilm)) {
-//              film.visible = true;
-//          }else{
-//              film.visible = false;
-//          }
-//      });
+
